@@ -26,7 +26,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow)) 
         {
             _rb.AddForce(transform.right * _speed*Time.deltaTime);
-        }     
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            _rb.AddForce(transform.right * -_speed * Time.deltaTime);
+        }
 
         if (Input.GetKey(KeyCode.RightArrow)) 
         {
@@ -38,9 +42,11 @@ public class PlayerController : MonoBehaviour
         }
         //shoot
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _lastBullet = Instantiate(_bullet, _head.position, Quaternion.identity);
+        {  
+            _lastBullet = BulletPool.Instance.RequestBullet();
+            _lastBullet.transform.position= _head.position;
             _lastBullet.GetComponent<BulletController>()._dir = transform.right;
+            _lastBullet.GetComponent<BulletController>().ChangeForce();
         }
 
         //limits
@@ -50,7 +56,7 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.position.x > 16.7f)
         {
-            transform.position = new Vector3(-16.6f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-15.6f, transform.position.y, transform.position.z);
         }
         if (transform.position.y < -16.8f)
         {
