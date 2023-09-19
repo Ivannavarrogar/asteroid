@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] private int _lifeTime = 3;
     [SerializeField] private float _speed=2;
     Rigidbody2D _rb;
+    private int _offset = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,8 +67,8 @@ public class BulletController : MonoBehaviour
                 var newAsteroid2 = AsteroidPool.Instance.Requestasteroid(1);
                 newAsteroid1.transform.position = col.collider.gameObject.transform.position;
                 newAsteroid2.transform.position = col.collider.gameObject.transform.position;
-                newAsteroid1.GetComponent<AdteroidController>().Move(new Vector2(_dir.x +5,_dir.y-5));
-                newAsteroid2.GetComponent<AdteroidController>().Move(new Vector2(_dir.x - 5, _dir.y + 5));
+                newAsteroid1.GetComponent<AdteroidController>().Move(new Vector2(_dir.x + _offset, _dir.y- _offset));
+                newAsteroid2.GetComponent<AdteroidController>().Move(new Vector2(_dir.x - _offset, _dir.y + _offset));
 
             }
 
