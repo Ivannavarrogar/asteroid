@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
         {
             _rb.AddForce(transform.right * -_speed * Time.deltaTime);
         }
-
         if (Input.GetKey(KeyCode.RightArrow)) 
         {
             transform.eulerAngles += new Vector3(0, 0, -_vel) * Time.deltaTime;
@@ -40,6 +39,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.eulerAngles += new Vector3(0, 0, _vel) * Time.deltaTime;
         }
+
         //shoot
         if (Input.GetKeyDown(KeyCode.Space))
         {  

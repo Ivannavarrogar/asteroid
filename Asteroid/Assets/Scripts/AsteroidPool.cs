@@ -28,6 +28,7 @@ public class AsteroidPool : MonoBehaviour
     }
     private void Start()
     {
+        //Instantiate the objects in the pool
         for (int i = 0; i < poolSize; i++)
         {
             GameObject asteroid = Instantiate(_asteroidPrefab);

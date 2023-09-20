@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _startWindow;
     [SerializeField] private TMPro.TMP_Text _score;
     private GameManager _gm;
+
     // Start is called before the first frame update
     void Start()
     {

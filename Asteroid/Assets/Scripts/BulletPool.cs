@@ -24,6 +24,7 @@ public class BulletPool : MonoBehaviour
     }
     private void Start()
     {
+        ////Instantiate the objects in the pool
         for (int i = 0; i < poolSize; i++)
         {
             GameObject bullet = Instantiate(_bulletPrefab);
