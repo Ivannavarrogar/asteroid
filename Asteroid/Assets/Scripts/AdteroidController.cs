@@ -9,6 +9,7 @@ public class AdteroidController : MonoBehaviour
     [SerializeField] private int _range = 9;
     [SerializeField] private int _vel = 9;
 
+    private Vector2 _movement;
     private GameManager _gm;
 
     private void Awake()
@@ -22,8 +23,8 @@ public class AdteroidController : MonoBehaviour
         _gm = GameManager.Instance;
         if (_type==0) 
         {
-            Vector2 movement = new Vector2(Random.Range(-_range, _range), (Random.Range(-_range, _range))) * _vel;
-            _rb.AddForce(movement);
+            _movement = new Vector2(Random.Range(-_range, _range), (Random.Range(-_range, _range))) * _vel;
+            _rb.AddForce(_movement);
             _rb.inertia = 0.45f;
         }
         //print(movement);
@@ -32,6 +33,9 @@ public class AdteroidController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.rotation = Quaternion.LookRotation(_movement) ;
+            //Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_rb.velocity), Time.deltaTime * 40f);
+
         //limits
         if (transform.position.x < -16.6)
         {
@@ -62,7 +66,13 @@ public class AdteroidController : MonoBehaviour
 
     public void Move(Vector2 dir)
     {
-        Vector2 movement = dir * _vel;
+        Vector2 movement = dir * _vel*2;
+        _rb.AddForce(movement);
+        _rb.inertia = 0.45f;
+    }
+    public void MoveBig()
+    {
+        Vector2 movement = new Vector2(Random.Range(-_range, _range), (Random.Range(-_range, _range))) * _vel;
         _rb.AddForce(movement);
         _rb.inertia = 0.45f;
     }

@@ -1445,7 +1445,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.3
   m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -2938,6 +2938,7 @@ MonoBehaviour:
   poolSize2: 24
   _asteroidList: []
   _asteroid2List: []
+  _bigAsteroidCount: 4
 --- !u!4 &1363394595
 Transform:
   m_ObjectHideFlags: 0

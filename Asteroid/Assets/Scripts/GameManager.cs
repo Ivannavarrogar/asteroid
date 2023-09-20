@@ -41,7 +41,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (AsteroidPool.Instance._bigAsteroidCount<2)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                var asteroid = AsteroidPool.Instance.Requestasteroid(0);
+                asteroid.transform.position = _spawners[Random.Range(0, 4)].transform.position;
+                asteroid.GetComponent<AdteroidController>().MoveBig();
+                AsteroidPool.Instance._bigAsteroidCount++;
+            }
+        }
     }
 
     public void Pause()

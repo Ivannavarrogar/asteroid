@@ -11,6 +11,8 @@ public class AsteroidPool : MonoBehaviour
     [SerializeField] private List<GameObject> _asteroidList;
     [SerializeField] private List<GameObject> _asteroid2List;
     private static AsteroidPool instance;
+
+    public int _bigAsteroidCount = 4;
     public static AsteroidPool Instance { get { return instance; } }
 
     private void Awake()

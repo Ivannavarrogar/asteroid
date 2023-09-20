@@ -9,7 +9,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] private int _lifeTime = 3;
     [SerializeField] private float _speed=2;
     Rigidbody2D _rb;
-    private int _offset = 1;
+    public int _offset = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +49,7 @@ public class BulletController : MonoBehaviour
     {
         if (col.collider.gameObject.CompareTag("Asteroid"))
         {
+            //Destoying a little asteroid
             if (col.collider.gameObject.GetComponent<AdteroidController>()._type==1)
             {
                 print("MATO ASTEROIDE");
@@ -56,20 +57,22 @@ public class BulletController : MonoBehaviour
                 col.collider.gameObject.SetActive(false);
                 gameObject.SetActive(false);
             }
+            //Destoying big asteroid
             if(col.collider.gameObject.GetComponent<AdteroidController>()._type == 0)
             {
                 print("DIVIDO ASTEROIDE");
                 GameManager.Instance.AddScore(10);
                 col.collider.gameObject.SetActive(false);
                 gameObject.SetActive(false);
-              ///New asteroids with angle from the bullet direction
+                //New asteroids 
                 var newAsteroid1 = AsteroidPool.Instance.Requestasteroid(1);
                 var newAsteroid2 = AsteroidPool.Instance.Requestasteroid(1);
                 newAsteroid1.transform.position = col.collider.gameObject.transform.position;
                 newAsteroid2.transform.position = col.collider.gameObject.transform.position;
-                newAsteroid1.GetComponent<AdteroidController>().Move(new Vector2(_dir.x + _offset, _dir.y- _offset));
-                newAsteroid2.GetComponent<AdteroidController>().Move(new Vector2(_dir.x - _offset, _dir.y + _offset));
-
+                //Divides the asteroid in two fragments, with bullet direction perpendicular velocity each one
+                newAsteroid1.GetComponent<AdteroidController>().Move(new Vector2(_dir.y,-_dir.x ));
+                newAsteroid2.GetComponent<AdteroidController>().Move(new Vector2(-_dir.y, _dir.x));
+                AsteroidPool.Instance._bigAsteroidCount--;
             }
 
         }
